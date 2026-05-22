@@ -1,0 +1,16 @@
+/* App-specific custom animations and overrides */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s infinite ease-in-out;
+}

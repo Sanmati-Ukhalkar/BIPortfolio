@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  
+  /* Modern Dashboard Color Palette */
+  --color-bg-dark: #090d16;
+  --color-bg-card: rgba(15, 23, 42, 0.45);
+  --color-card-border: rgba(51, 65, 85, 0.5);
+  --color-accent-blue: #38bdf8;
+  --color-accent-teal: #14b8a6;
+  --color-accent-indigo: #6366f1;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  
+  --shadow-glow-blue: 0 0 15px rgba(56, 189, 248, 0.2);
+  --shadow-glow-teal: 0 0 15px rgba(20, 184, 166, 0.2);
+  --shadow-glow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+  
+  body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+  }
+  
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #090d16;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
+
+/* Glassmorphism custom classes */
+.glass-panel {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-glow-card);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), var(--shadow-glow-card);
+}
+
+/* Grid overlay background effect */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Glowing dot background */
+.radial-glow {
+  background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(56, 189, 248, 0.08), transparent 80%);
+}
