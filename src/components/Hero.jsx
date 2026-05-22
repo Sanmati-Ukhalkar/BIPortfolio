@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, BarChart3, Database, TrendingUp, Cpu, FileText } from 'lucide-react';
+import DecryptedText from './ui/DecryptedText';
+import RotatingText from './ui/RotatingText';
+import ShinyText from './ui/ShinyText';
+import TiltedCard from './ui/TiltedCard';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -35,22 +39,31 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel text-accent-blue text-xs font-semibold self-start shadow-glow-blue border-accent-blue/20">
             <Cpu className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
-            <span>Fresher BI Developer | AI & Data Science Student</span>
+            <DecryptedText text="Fresher BI Developer | AI & Data Science Student" animateOn="mount" speed={40} />
           </div>
 
           {/* Main Tagline */}
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
-            Hi, I'm <span className="text-accent-teal">[Your Name]</span> — <br />
+            Hi, I'm <span className="text-accent-teal font-extrabold cursor-default"><DecryptedText text="Sanmati" animateOn="hover" speed={60} /></span> — <br />
             <span className="bg-gradient-to-r from-accent-blue via-accent-indigo to-accent-teal bg-clip-text text-transparent">
               I turn raw data into decisions.
             </span>
           </h1>
 
           {/* Detailed Paragraph */}
-          <p className="text-text-secondary text-base sm:text-lg max-w-xl font-normal leading-relaxed">
-            I don't just build dashboards — I build clarity for businesses that run on data. <br/>
-            <span className="font-bold text-white">Power BI • SQL • Python</span>
-          </p>
+          <div className="text-text-secondary text-base sm:text-lg max-w-xl font-normal leading-relaxed space-y-2">
+            <p>
+              I don't just build dashboards — I build clarity for businesses that run on data.
+            </p>
+            <p className="flex items-center gap-2 text-white font-medium">
+              <span>Specialized in: </span>
+              <RotatingText 
+                texts={['Power BI Dashboards', 'SQL Relational Queries', 'Python Analytics', 'End-to-End Data Pipelines']} 
+                className="text-accent-blue font-bold border-b border-accent-blue/30"
+                interval={2500} 
+              />
+            </p>
+          </div>
 
           {/* Call to Actions */}
           <div className="flex flex-wrap gap-4 pt-2">
@@ -58,16 +71,16 @@ const Hero = () => {
               href="#projects" 
               className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-accent-blue to-accent-indigo text-bg-dark font-bold text-sm tracking-wide shadow-glow-blue transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(56,189,248,0.4)]"
             >
-              View My Projects
-              <ArrowRight className="w-4 h-4" />
+              <ShinyText text="View My Projects" speed={4} className="font-bold text-bg-dark" />
+              <ArrowRight className="w-4 h-4 text-bg-dark" />
             </a>
             <a 
               href="/resume.pdf" 
               download
               className="flex items-center gap-2 px-6 py-3.5 rounded-xl glass-panel text-white hover:text-accent-teal hover:border-accent-teal/40 font-bold text-sm tracking-wide transition-all duration-300 hover:scale-[1.03]"
             >
-              <FileText className="w-4 h-4" />
-              Download Resume
+              <FileText className="w-4 h-4 text-white" />
+              <ShinyText text="Download Resume" speed={4} className="font-bold text-white hover:text-accent-teal" />
             </a>
             <a 
               href="#contact" 
@@ -79,9 +92,9 @@ const Hero = () => {
 
         </div>
 
-        {/* Hero Right Visuals - BI Visual Floaters Mockup */}
+        {/* Hero Right Visuals - BI Visual Floaters Mockup with 3D Parallax Tilt */}
         <div className="lg:col-span-5 relative flex justify-center items-center">
-          <div className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
+          <TiltedCard maxTilt={15} scale={1.03} className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
             
             {/* Core glowing central shield */}
             <div className="absolute w-[240px] h-[240px] rounded-full bg-gradient-to-br from-accent-blue/20 to-accent-teal/20 border border-white/10 animate-pulse flex items-center justify-center shadow-glow-blue">
@@ -118,7 +131,7 @@ const Hero = () => {
             <div className="absolute -top-10 right-10 w-3 h-3 rounded-full bg-accent-teal shadow-glow-teal animate-ping" />
             <div className="absolute -bottom-8 left-10 w-2.5 h-2.5 rounded-full bg-accent-blue shadow-glow-blue animate-ping" style={{ animationDelay: '1.5s' }} />
 
-          </div>
+          </TiltedCard>
         </div>
 
       </div>

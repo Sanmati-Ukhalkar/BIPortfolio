@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Menu, X, Database } from 'lucide-react';
+import { useLenis } from 'lenis/react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isVisible, setIsVisible] = useState(true);
 
   const navLinks = [
     { name: 'Home', href: '#hero', id: 'hero' },
@@ -15,38 +17,45 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Background change on scroll
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+  useLenis(({ scroll, direction, velocity }) => {
+    // Toggle background state when scrolling past initial boundary
+    setIsScrolled(scroll > 20);
+
+    // Smart visibility toggling: hide on scroll down with momentum, show on scroll up or top
+    if (scroll < 100) {
+      setIsVisible(true);
+    } else if (direction === 1 && velocity > 0.5) {
+      setIsVisible(false);
+    } else if (direction === -1) {
+      setIsVisible(true);
+    }
+
+    // Precision active section tracking using Lenis coordinate frame
+    const sections = navLinks.map(link => document.getElementById(link.id));
+    const scrollPosition = scroll + 120; // target alignment offset
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (section && scrollPosition >= section.offsetTop) {
+        setActiveSection(navLinks[i].id);
+        break;
       }
-
-      // Track active section on scroll
-      const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 120; // offset
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(navLinks[i].id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    }
+  });
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'py-3 bg-bg-dark/80 backdrop-blur-md border-b border-white/5 shadow-lg' 
-        : 'py-5 bg-transparent'
-    }`}>
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+        isScrolled 
+          ? 'py-3 bg-bg-dark/80 backdrop-blur-md border-b border-white/5 shadow-lg' 
+          : 'py-5 bg-transparent'
+      }`}
+      style={{
+        transform: `translateY(${isVisible ? '0' : '-100%'})`,
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#hero" className="flex items-center gap-2 group">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart2, Database, Code, ArrowUpRight } from 'lucide-react';
+import SpotlightCard from './ui/SpotlightCard';
 
 const Skills = () => {
   const pillars = [
@@ -8,6 +9,7 @@ const Skills = () => {
       icon: BarChart2,
       color: "from-accent-blue to-accent-indigo",
       shadow: "shadow-glow-blue",
+      spotlightColor: "rgba(56, 189, 248, 0.15)",
       details: "I connect to raw data sources, clean and model the data, and build interactive Power BI dashboards that track KPIs, reveal trends, and support faster business decisions.",
       tools: ["Power BI", "DAX", "Power Query", "Excel"]
     },
@@ -16,6 +18,7 @@ const Skills = () => {
       icon: Database,
       color: "from-accent-teal to-emerald-500",
       shadow: "shadow-glow-teal",
+      spotlightColor: "rgba(20, 184, 166, 0.15)",
       details: "I write structured SQL queries — joins, CTEs, window functions — to extract and transform data from relational databases before visualization.",
       tools: ["SQL Server", "MySQL", "CTEs", "Window Functions"]
     },
@@ -24,6 +27,7 @@ const Skills = () => {
       icon: Code,
       color: "from-yellow-400 to-orange-500",
       shadow: "shadow-[0_0_15px_rgba(250,204,21,0.2)]",
+      spotlightColor: "rgba(250, 204, 21, 0.12)",
       details: "I use Python for exploratory data analysis, statistical summaries, and data preprocessing — bridging the gap between raw data and business-ready insights.",
       tools: ["Python", "Pandas", "NumPy", "Scikit-Learn"]
     }
@@ -45,14 +49,15 @@ const Skills = () => {
           <div className="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-teal mx-auto rounded-full shadow-glow-blue" />
         </div>
 
-        {/* 3 Pillars Grid */}
+        {/* 3 Pillars Grid using SpotlightCard */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
-              <div 
+              <SpotlightCard 
                 key={idx}
-                className="glass-panel p-8 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all duration-300 group hover:-translate-y-2"
+                spotlightColor={pillar.spotlightColor}
+                className="p-8 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-white/15 transition-all duration-300 group hover:-translate-y-1.5"
               >
                 <div>
                   <div className={`p-4 inline-block rounded-2xl bg-gradient-to-br ${pillar.color} mb-6 ${pillar.shadow} bg-opacity-10`}>
@@ -80,7 +85,7 @@ const Skills = () => {
                     </span>
                   ))}
                 </div>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>

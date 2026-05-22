@@ -3,6 +3,7 @@ import SalesDashboard from './dashboards/SalesDashboard';
 import HRDashboard from './dashboards/HRDashboard';
 import FinancialDashboard from './dashboards/FinancialDashboard';
 import { AreaChart, Users, DollarSign, BrainCircuit, CheckCircle, Cpu, ShieldAlert, Star, TrendingUp } from 'lucide-react';
+import SpotlightCard from './ui/SpotlightCard';
 
 const Projects = () => {
   const [activeDashboard, setActiveDashboard] = useState('sales');
@@ -129,8 +130,8 @@ const Projects = () => {
           <DashboardComponent />
         </div>
 
-        {/* Architectural Case Study Breakdown */}
-        <div className="glass-panel p-8 rounded-3xl border border-white/5 shadow-xl relative overflow-hidden">
+        {/* Architectural Case Study Breakdown using SpotlightCard */}
+        <SpotlightCard spotlightColor="rgba(20, 184, 166, 0.15)" className="p-8 rounded-3xl border border-white/5 shadow-xl relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/5" />
           
           <div className="flex flex-col lg:flex-row gap-8 items-start">
@@ -199,7 +200,7 @@ const Projects = () => {
             </div>
 
           </div>
-        </div>
+        </SpotlightCard>
 
       </div>
     </section>
